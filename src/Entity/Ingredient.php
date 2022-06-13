@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\IngredientRepository;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -29,7 +30,7 @@ class Ingredient
 
     #[ORM\Column(type: 'datetime_immutable')]
     #[Assert\NotNull()]
-    private $createdAt;
+    private ?DateTimeImmutable $createdAt;
 
     public function __construct()
     {
