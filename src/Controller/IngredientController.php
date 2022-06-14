@@ -30,10 +30,12 @@ class IngredientController extends AbstractController
     }
 
     #[Route('/ingredient/nouveau', 'ingredient.new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $manager): Response
-    {
-        $ingredient = new Ingredient();
-        $form = $this->createForm(IngredientType::class, $ingredient);
+    public function new(
+        Request $request,
+        EntityManagerInterface $manager
+        ): Response {
+            $ingredient = new Ingredient();
+            $form = $this->createForm(IngredientType::class, $ingredient);
 
         $form->handleRequest($request);
         // dd($form);
@@ -59,8 +61,11 @@ class IngredientController extends AbstractController
     }
 
     #[Route('/ingredient/edition/{id}', 'ingredient.edit', methods: ['GET', 'POST'])]
-    public function edit(Ingredient $ingredient, Request $request, EntityManagerInterface $manager): Response
-    {
+    public function edit(
+        Ingredient $ingredient,
+        Request $request,
+        EntityManagerInterface $manager
+    ): Response {
         $form = $this->createForm(IngredientType::class, $ingredient);
         $form->handleRequest($request);
 
@@ -72,7 +77,7 @@ class IngredientController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre ingrédient à été modifié avec succès !'
+                'Votre Ingrédient à été modifié avec succès !'
             );
 
             return $this->redirectToRoute('ingredient.index');
@@ -84,16 +89,10 @@ class IngredientController extends AbstractController
     }
 
     #[Route('/ingredient/suppression/{id}', 'ingredient.delete', methods: ['GET'])]
-    public function delete(EntityManagerInterface $manager, Ingredient $ingredient): Response
-    {
-        // if (!$ingredient) {
-        //     $this->addFlash(
-        //         'warning',
-        //         'Votre ingrédient n\'a pas été trouvé !'
-        //     );
-        //     return $this->redirectToRoute('ingredient.index');
-        // }
-
+    public function delete(
+        EntityManagerInterface $manager,
+        Ingredient $ingredient
+    ): Response {
         $manager->remove($ingredient);
         $manager->flush();
 
