@@ -8,32 +8,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
-class RegistrationType extends AbstractType
+class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email', EmailType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                    'minlength' => '2',
-                    'maxlength' => '180',
-                ],
-                'label' => 'Email',
-                'label_attr' => [
-                    'class' => 'form-label mt-4'
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
-                    new Assert\Email(),
-                    new Assert\Length(['min' => 2, 'max' => 180]),
-                ],
-            ])
             ->add('fullname', TextType::class, [
                 'attr' => [
                     'class' => 'form-control',
@@ -65,33 +46,12 @@ class RegistrationType extends AbstractType
                     new Assert\Length(['min' => 2, 'max' => 50]),
                 ],
             ])
-            ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'first_options' => [
-                    'attr' => [
-                        'class' => 'form-control',
-                    ],
-                    'label' => 'Mot de Passe',
-                    'label_attr' => [
-                        'class' => 'form-label mt-4'
-                    ]
-                ],
-                'second_options' => [
-                    'attr' => [
-                        'class' => 'form-control',
-                    ],
-                    'label' => 'Confirmation du Mot de Passe',
-                    'label_attr' => [
-                        'class' => 'form-label mt-4'
-                    ]
-                ],
-                'invalid_message' => 'Les Mots de Passe ne correspondent pas.'
-            ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
                     'class' => 'btn btn-primary mt-4'
                 ]
             ]);
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
