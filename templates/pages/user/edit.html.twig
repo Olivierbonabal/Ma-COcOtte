@@ -1,16 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ma COcOtte-Modification de l'Utilisateur{% endblock %}
+{% block title %}Ma COcOtte-Modification de l'Utilisateur
+{% endblock %}
 
 {% block body %}
-<div class="container">
-<h1 class="mt-4">Formulaire de Modification des Informations de l'Utilisateur</h1>
-</div>
+	<div class="container">
+		<h1 class="mt-4">Formulaire de Modification des Informations de l'Utilisateur</h1>
 
-{{ form(form) }}
+		{% for message in app.flashes('warning') %}
+			<div class="alert alert-warning mt-4">
+				{{ message }}
+			</div>
+		{% endfor %}
 
 
-
-
-
-{% endblock %}
+		{{ form(form) }}
+		</div>
+	{% endblock %}
